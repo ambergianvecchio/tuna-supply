@@ -1,0 +1,20 @@
+node_modules/
+.next/
+.env.local
+.env*.local
+
+# Personal files
+medical records/
+tunaprofilepic.jpg
+*.zip
+.DS_Store
+
+# Root asset files (copies - originals are in public/ or src/)
+/AdobeStock_*.jpeg
+/birthday.png
+/cake.png
+/documents.png
+/pill.png
+/tempura.png
+/skewer.png
+.claude/
