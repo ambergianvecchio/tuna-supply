@@ -25,7 +25,7 @@ const config: Config = {
       },
       fontFamily: {
         display: ['var(--font-suka-coffee)', 'sans-serif'],
-        body: ['var(--font-qurova)', 'sans-serif'],
+        body: ['var(--font-figtree)', 'sans-serif'],
       },
       boxShadow: {
         warm: '0 2px 12px rgba(139, 109, 71, 0.08)',

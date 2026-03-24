@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
+import { Figtree } from 'next/font/google'
 import './globals.css'
 
 const sukaCoffee = localFont({
@@ -8,9 +9,9 @@ const sukaCoffee = localFont({
   display: 'swap',
 })
 
-const qurova = localFont({
-  src: '../fonts/Qurova.otf',
-  variable: '--font-qurova',
+const figtree = Figtree({
+  subsets: ['latin'],
+  variable: '--font-figtree',
   display: 'swap',
 })
 
@@ -39,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${sukaCoffee.variable} ${qurova.variable}`}>
+    <html lang="en" className={`${sukaCoffee.variable} ${figtree.variable}`}>
       <head>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
