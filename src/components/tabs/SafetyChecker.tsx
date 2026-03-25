@@ -165,7 +165,7 @@ export default function SafetyChecker() {
         </div>
       )}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/cat-sitting.svg" alt="" className="w-[280px] mx-auto !mt-2" style={{ transform: 'scaleX(-1)' }} />
+      <img src="/cat-sitting.svg" alt="" className="w-[280px] mx-auto !mt-8" style={{ transform: 'scaleX(-1)' }} />
     </div>
   )
 }
