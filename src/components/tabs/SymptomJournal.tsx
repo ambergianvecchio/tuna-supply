@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
 import { formatDate } from '@/lib/utils'
 import Modal from '@/components/Modal'
@@ -12,6 +12,7 @@ interface SymptomLog {
   date: string
   tags: string[]
   notes: string | null
+  photo_url: string | null
   triage_level: string | null
   triage_explanation: string | null
   triage_monitor_list: string[] | null
@@ -45,10 +46,13 @@ export default function SymptomJournal() {
   const [formDate, setFormDate] = useState(new Date().toISOString().split('T')[0])
   const [formTags, setFormTags] = useState<string[]>([])
   const [formNotes, setFormNotes] = useState('')
+  const [formPhoto, setFormPhoto] = useState<File | null>(null)
+  const [formPhotoPreview, setFormPhotoPreview] = useState<string | null>(null)
   const [triageResult, setTriageResult] = useState<TriageResult | null>(null)
   const [triageLoading, setTriageLoading] = useState(false)
   const [saving, setSaving] = useState(false)
   const [formError, setFormError] = useState('')
+  const photoInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => { fetchLogs() }, [])
 
@@ -60,6 +64,30 @@ export default function SymptomJournal() {
 
   function toggleTag(tag: string) {
     setFormTags((prev) => prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag])
+  }
+
+  function handlePhotoSelect(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setFormPhoto(file)
+    const reader = new FileReader()
+    reader.onload = () => setFormPhotoPreview(reader.result as string)
+    reader.readAsDataURL(file)
+    e.target.value = ''
+  }
+
+  function removePhoto() {
+    setFormPhoto(null)
+    setFormPhotoPreview(null)
+  }
+
+  async function uploadPhoto(file: File): Promise<string | null> {
+    const safeName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`
+    const path = `symptom-photos/${safeName}`
+    const { error } = await supabase.storage.from('cat-profile').upload(path, file)
+    if (error) { console.error('Photo upload error:', error); return null }
+    const { data: { publicUrl } } = supabase.storage.from('cat-profile').getPublicUrl(path)
+    return publicUrl
   }
 
   async function getTriage() {
@@ -93,8 +121,14 @@ export default function SymptomJournal() {
     setSaving(true)
     setFormError('')
     try {
+      let photoUrl: string | null = null
+      if (formPhoto) {
+        photoUrl = await uploadPhoto(formPhoto)
+      }
+
       const { error } = await supabase.from('symptom_logs').insert({
         date: formDate, tags: formTags, notes: formNotes || null,
+        photo_url: photoUrl,
         triage_level: triageResult?.urgency || null,
         triage_explanation: triageResult?.explanation || null,
         triage_monitor_list: triageResult?.monitor_list || null,
@@ -114,6 +148,8 @@ export default function SymptomJournal() {
     setFormDate(new Date().toISOString().split('T')[0])
     setFormTags([])
     setFormNotes('')
+    setFormPhoto(null)
+    setFormPhotoPreview(null)
     setTriageResult(null)
     setFormError('')
   }
@@ -169,6 +205,13 @@ export default function SymptomJournal() {
 
               {expandedId === log.id && (
                 <div className="px-4 pb-4 border-t border-warm-border/30 pt-3 space-y-3">
+                  {log.photo_url && (
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-wider text-text-secondary">Photo</p>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={log.photo_url} alt="Symptom photo" className="mt-1 w-full max-h-48 object-cover rounded-card border border-warm-border/40" />
+                    </div>
+                  )}
                   {log.notes && (
                     <div>
                       <p className="text-xs font-bold uppercase tracking-wider text-text-secondary">Notes</p>
@@ -232,6 +275,40 @@ export default function SymptomJournal() {
             <label className="text-xs font-bold uppercase tracking-wider text-text-secondary">Describe what you&apos;re observing</label>
             <textarea placeholder="What's going on with Tuna?" value={formNotes} onChange={(e) => setFormNotes(e.target.value)} rows={3}
               className="w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 mt-1 resize-none border border-warm-border/40" />
+          </div>
+
+          <div>
+            <label className="text-xs font-bold uppercase tracking-wider text-text-secondary">Photo</label>
+            {formPhotoPreview ? (
+              <div className="relative mt-2">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={formPhotoPreview} alt="Preview" className="w-full max-h-40 object-cover rounded-card border border-warm-border/40" />
+                <button
+                  onClick={removePhoto}
+                  className="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-white/90 text-text-secondary hover:bg-coral-red hover:text-white transition-colors shadow-warm"
+                >
+                  <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <line x1="1" y1="1" x2="13" y2="13" />
+                    <line x1="13" y1="1" x2="1" y2="13" />
+                  </svg>
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => photoInputRef.current?.click()}
+                className="w-full mt-1 border-2 border-dashed border-teal/40 text-teal font-semibold py-3 rounded-card hover:bg-teal-light/30 transition-colors text-sm"
+              >
+                Add Photo
+              </button>
+            )}
+            <input
+              ref={photoInputRef}
+              type="file"
+              accept="image/*"
+              capture="environment"
+              onChange={handlePhotoSelect}
+              className="hidden"
+            />
           </div>
 
           <button onClick={getTriage} disabled={triageLoading}
