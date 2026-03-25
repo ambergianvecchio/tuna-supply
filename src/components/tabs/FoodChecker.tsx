@@ -158,7 +158,7 @@ export default function FoodChecker() {
           <div className="text-center">
             <h2 className="font-display text-lg font-extrabold text-island-green">Food Label Checker</h2>
             <p className="text-sm text-text-secondary mt-1">We&apos;ll check what&apos;s good (and not so good) for Tuna</p>
-            <FoodBowlIllustration size={90} className="mx-auto mt-3 animate-float" />
+            <FoodBowlIllustration size={250} className="mx-auto mt-6 mb-2 animate-float" />
           </div>
 
           <div className="space-y-3">
