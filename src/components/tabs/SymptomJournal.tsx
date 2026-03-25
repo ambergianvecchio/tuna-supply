@@ -305,7 +305,6 @@ export default function SymptomJournal() {
               ref={photoInputRef}
               type="file"
               accept="image/*"
-              capture="environment"
               onChange={handlePhotoSelect}
               className="hidden"
             />
