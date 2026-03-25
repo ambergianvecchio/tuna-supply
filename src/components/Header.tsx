@@ -48,12 +48,12 @@ export default function Header() {
           {/* Profile photo */}
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="relative shrink-0 w-[68px] h-[68px] rounded-2xl overflow-hidden bg-[#FFF8F0] transition-transform active:scale-95 shadow-warm"
+            className="relative shrink-0 w-[84px] h-[84px] rounded-2xl overflow-hidden bg-[#FFF8F0] transition-transform active:scale-95 shadow-warm"
           >
             {photoUrl ? (
               <img src={photoUrl} alt="Tuna" className="w-full h-full object-cover" />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-2xl font-bold text-[#6B7F5E]">
+              <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-[#6B7F5E]">
                 T
               </div>
             )}
@@ -68,12 +68,12 @@ export default function Header() {
           {/* Info */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-1.5">
-              <h1 className="font-display text-2xl font-extrabold text-island-green">Tuna</h1>
-              <Sparkle size={14} />
+              <h1 className="font-display text-3xl font-extrabold text-island-green">Tuna</h1>
+              <Sparkle size={16} />
             </div>
-            <p className="text-xs text-text-secondary mt-0.5 flex items-center gap-1">
-              <LeafSprig size={14} />
-              {calculateAge(TUNA_BIRTHDAY)} &middot; <IconCake size={14} className="inline-block" /> Jan 17, 2023
+            <p className="text-xs text-text-secondary mt-1 flex items-center gap-1 whitespace-nowrap">
+              <LeafSprig size={15} />
+              {calculateAge(TUNA_BIRTHDAY)} &middot; <IconCake size={15} className="inline-block" /> Jan 17, 2023
             </p>
           </div>
         </div>
