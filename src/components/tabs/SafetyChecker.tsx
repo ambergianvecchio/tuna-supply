@@ -13,9 +13,9 @@ interface SafetyResult {
 const HISTORY_KEY = 'tuna-safety-history'
 
 const statusConfig = {
-  safe: { badge: 'badge-safe', label: 'Safe for Tuna', symbol: '\u2713' },
-  caution: { badge: 'badge-caution', label: 'Use Caution', symbol: '!' },
-  toxic: { badge: 'badge-toxic', label: 'Toxic \u2014 Keep Away', symbol: '\u2717' },
+  safe: { badge: 'badge-safe', label: 'Safe for Tuna', symbol: '\u2713', tilt: '-2deg' },
+  caution: { badge: 'badge-caution', label: 'Use Caution', symbol: '!', tilt: '1.5deg' },
+  toxic: { badge: 'badge-toxic', label: 'Toxic \u2014 Keep Away', symbol: '\u2717', tilt: '-1deg' },
 }
 
 export default function SafetyChecker() {
@@ -107,6 +107,7 @@ export default function SafetyChecker() {
           <div className="text-center">
             <span
               className={`badge badge-sticker ${statusConfig[result.status].badge} text-sm px-5 py-2`}
+              style={{ transform: `rotate(${statusConfig[result.status].tilt})` }}
             >
               {statusConfig[result.status].symbol}&nbsp;&nbsp;{statusConfig[result.status].label}
             </span>
