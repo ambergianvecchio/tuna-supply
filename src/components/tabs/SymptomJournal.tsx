@@ -42,6 +42,7 @@ export default function SymptomJournal() {
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [expandedId, setExpandedId] = useState<string | null>(null)
+  const [deleting, setDeleting] = useState<string | null>(null)
 
   const [formDate, setFormDate] = useState(new Date().toISOString().split('T')[0])
   const [formTags, setFormTags] = useState<string[]>([])
@@ -144,6 +145,20 @@ export default function SymptomJournal() {
     }
   }
 
+  async function handleDelete(id: string) {
+    setDeleting(id)
+    try {
+      const { error } = await supabase.from('symptom_logs').delete().eq('id', id)
+      if (error) throw error
+      setLogs((prev) => prev.filter((l) => l.id !== id))
+      setExpandedId(null)
+    } catch {
+      // silent fail
+    } finally {
+      setDeleting(null)
+    }
+  }
+
   function resetForm() {
     setFormDate(new Date().toISOString().split('T')[0])
     setFormTags([])
@@ -240,6 +255,13 @@ export default function SymptomJournal() {
                   <p className="text-[10px] text-text-secondary italic">
                     This is not a substitute for professional veterinary advice.
                   </p>
+                  <button
+                    onClick={() => handleDelete(log.id)}
+                    disabled={deleting === log.id}
+                    className="text-xs text-coral-red/70 hover:text-coral-red transition-colors disabled:opacity-50 mt-2"
+                  >
+                    {deleting === log.id ? 'Deleting...' : 'Delete Entry'}
+                  </button>
                 </div>
               )}
             </div>
