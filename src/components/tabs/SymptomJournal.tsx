@@ -266,12 +266,10 @@ export default function SymptomJournal() {
               )}
             </div>
           ))}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/cat-silhouette.svg" alt="" className="mx-auto w-[220px] mt-1" />
         </div>
       )}
-
-      {/* Cat silhouette decoration */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/cat-silhouette.svg" alt="" className="mx-auto w-[220px] -mt-2" />
 
       {/* Log Symptom Modal */}
       <Modal open={showModal} onClose={() => setShowModal(false)} title="Log Symptom">
