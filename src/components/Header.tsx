@@ -67,7 +67,7 @@ export default function Header() {
 
           {/* Info */}
           <div className="flex-1 min-w-0 relative">
-            <div className="relative z-10">
+            <div className="relative z-10 -ml-0.5">
               <div className="flex items-center gap-1.5">
                 <h1 className="font-display text-2xl font-extrabold text-island-green">Tuna</h1>
                 <Sparkle size={14} />
