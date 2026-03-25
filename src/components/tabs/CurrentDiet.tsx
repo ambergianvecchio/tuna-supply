@@ -27,7 +27,7 @@ interface DietItem {
 const FOOD_TYPES = ['wet', 'dry', 'raw', 'freeze-dried', 'topper'] as const
 
 const typeConfig: Record<string, { bg: string; icon: string }> = {
-  wet: { bg: 'bg-teal/10 text-teal border-teal/20', icon: '/skewer.png' },
+  wet: { bg: 'bg-teal/10 text-teal border-teal/20', icon: '/wet.png' },
   dry: { bg: 'bg-warm-yellow/10 text-yellow-700 border-warm-yellow/30', icon: '/tempura.png' },
   raw: { bg: 'bg-red-100 text-red-600 border-red-200', icon: '/raw.png' },
   'freeze-dried': { bg: 'bg-amber-50 text-amber-800 border-amber-200', icon: '/tempura.png' },
