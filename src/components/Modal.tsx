@@ -28,10 +28,10 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
   return (
     <div
       ref={backdropRef}
-      className="fixed inset-0 bg-black/40 z-50 flex items-end justify-center"
+      className="fixed inset-0 bg-black/40 z-[60] flex items-end justify-center"
       onClick={(e) => e.target === backdropRef.current && onClose()}
     >
-      <div className="w-full max-w-[430px] bg-white rounded-t-[24px] max-h-[85vh] flex flex-col animate-slide-up">
+      <div className="w-full max-w-[430px] mx-2 bg-white rounded-t-[24px] max-h-[90dvh] flex flex-col animate-slide-up overflow-hidden">
         <div className="flex items-center justify-between px-4 py-4 border-b border-gray-100 shrink-0">
           <h3 className="font-display font-bold text-lg">{title}</h3>
           <button
@@ -44,7 +44,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
             </svg>
           </button>
         </div>
-        <div className="px-4 py-4 overflow-y-auto">
+        <div className="px-4 py-4 flex-1 min-h-0 overflow-y-auto">
           {children}
         </div>
       </div>
