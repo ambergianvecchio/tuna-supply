@@ -14,7 +14,7 @@ const HISTORY_KEY = 'tuna-safety-history'
 
 const statusConfig = {
   safe: { badge: 'badge-safe', label: 'Safe for Tuna', symbol: '\u2713' },
-  caution: { badge: 'badge-caution', label: 'Use Caution', symbol: '\u26A0' },
+  caution: { badge: 'badge-caution', label: 'Use Caution', symbol: '!' },
   toxic: { badge: 'badge-toxic', label: 'Toxic \u2014 Keep Away', symbol: '\u2717' },
 }
 

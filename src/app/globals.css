@@ -38,8 +38,10 @@
   .badge-go-now { background-color: #EF6461; color: white; }
 
   .badge-sticker {
-    box-shadow: 0 2px 12px rgba(139, 109, 71, 0.08);
-    transform: rotate(-1deg);
+    box-shadow: 0 2px 12px rgba(139, 109, 71, 0.12), 0 1px 3px rgba(0, 0, 0, 0.06);
+    transform: rotate(-1.5deg);
+    outline: 2px solid rgba(255, 255, 255, 0.7);
+    outline-offset: -3px;
   }
 
   .card-warm {
