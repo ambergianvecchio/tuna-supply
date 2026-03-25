@@ -66,18 +66,22 @@ export default function Header() {
           </button>
 
           {/* Info */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-1.5">
-              <h1 className="font-display text-2xl font-extrabold text-island-green">Tuna</h1>
-              <Sparkle size={14} />
+          <div className="flex-1 min-w-0 relative">
+            <div className="relative z-10">
+              <div className="flex items-center gap-1.5">
+                <h1 className="font-display text-2xl font-extrabold text-island-green">Tuna</h1>
+                <Sparkle size={14} />
+              </div>
+              <p className="text-xs text-text-secondary mt-1.5 flex items-center gap-1">
+                <LeafSprig size={13} />
+                {calculateAge(TUNA_BIRTHDAY)}
+              </p>
+              <p className="text-xs text-text-secondary mt-1 flex items-center gap-1">
+                <IconCake size={13} /> Jan 17, 2023
+              </p>
             </div>
-            <p className="text-sm text-text-secondary mt-1.5 flex items-center gap-1">
-              <LeafSprig size={14} />
-              {calculateAge(TUNA_BIRTHDAY)}
-            </p>
-            <p className="text-sm text-text-secondary mt-1 flex items-center gap-1">
-              <IconCake size={14} /> Jan 17, 2023
-            </p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/tree.png" alt="" className="absolute -right-2 -bottom-3 w-[95px] h-[95px] object-contain" />
           </div>
         </div>
       </div>
