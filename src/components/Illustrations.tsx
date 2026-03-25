@@ -203,6 +203,31 @@ export function NotebookIllustration({ size = 80, className = '' }: { size?: num
   )
 }
 
+export function BirdsIllustration({ size = 120, className = '' }: { size?: number; className?: string }) {
+  return (
+    <svg width={size} height={size * 0.6} viewBox="0 0 200 120" fill="none" strokeLinecap={R} strokeLinejoin={R} className={className}>
+      {/* Bird 1 - top left */}
+      <path d="M30 45 Q25 35 18 38 Q25 32 30 45" stroke={O} strokeWidth="1.5" fill="none" opacity="0.3" />
+      <path d="M30 45 Q35 35 42 38 Q35 32 30 45" stroke={O} strokeWidth="1.5" fill="none" opacity="0.3" />
+      {/* Bird 2 - top center */}
+      <path d="M80 30 Q73 18 65 22 Q73 14 80 30" stroke={O} strokeWidth="1.5" fill="none" opacity="0.25" />
+      <path d="M80 30 Q87 18 95 22 Q87 14 80 30" stroke={O} strokeWidth="1.5" fill="none" opacity="0.25" />
+      {/* Bird 3 - center right, slightly larger */}
+      <path d="M145 50 Q138 36 128 40 Q138 30 145 50" stroke={O} strokeWidth="1.8" fill="none" opacity="0.2" />
+      <path d="M145 50 Q152 36 162 40 Q152 30 145 50" stroke={O} strokeWidth="1.8" fill="none" opacity="0.2" />
+      {/* Bird 4 - small, top right */}
+      <path d="M170 25 Q166 18 160 20 Q166 14 170 25" stroke={O} strokeWidth="1.2" fill="none" opacity="0.2" />
+      <path d="M170 25 Q174 18 180 20 Q174 14 170 25" stroke={O} strokeWidth="1.2" fill="none" opacity="0.2" />
+      {/* Bird 5 - bottom center */}
+      <path d="M105 75 Q99 63 91 67 Q99 58 105 75" stroke={O} strokeWidth="1.5" fill="none" opacity="0.15" />
+      <path d="M105 75 Q111 63 119 67 Q111 58 105 75" stroke={O} strokeWidth="1.5" fill="none" opacity="0.15" />
+      {/* Bird 6 - small, far left */}
+      <path d="M55 65 Q51 58 46 60 Q51 54 55 65" stroke={O} strokeWidth="1.2" fill="none" opacity="0.18" />
+      <path d="M55 65 Q59 58 64 60 Q59 54 55 65" stroke={O} strokeWidth="1.2" fill="none" opacity="0.18" />
+    </svg>
+  )
+}
+
 // ─── SMALL ICONS ─────────────────────────────────────────
 
 export function IconStethoscope({ size = 20, className = '' }: { size?: number; className?: string }) {
