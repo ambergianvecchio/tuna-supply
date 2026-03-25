@@ -155,15 +155,16 @@ export default function FoodChecker() {
         <CurrentDiet />
       ) : (
         <div className="space-y-4 py-4">
-          <div>
+          <div className="text-center">
             <h2 className="font-display text-lg font-extrabold text-island-green">Food Label Checker</h2>
-            <p className="text-sm text-text-secondary mt-1">Paste a cat food ingredient list to analyze it</p>
+            <p className="text-sm text-text-secondary mt-1">We&apos;ll check what&apos;s good (and not so good) for Tuna</p>
+            <FoodBowlIllustration size={90} className="mx-auto mt-3 animate-float" />
           </div>
 
           <div className="space-y-3">
             <input type="text" placeholder="Product name (optional)" value={productName} onChange={(e) => setProductName(e.target.value)}
               className="w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 transition-shadow border border-warm-border/40" />
-            <textarea placeholder="Paste ingredients here..." value={ingredients} onChange={(e) => setIngredients(e.target.value)} rows={5}
+            <textarea placeholder="Paste ingredients here..." value={ingredients} onChange={(e) => setIngredients(e.target.value)} rows={3}
               className="w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 transition-shadow resize-none border border-warm-border/40" />
             <button
               onClick={() => photoInputRef.current?.click()}
@@ -211,13 +212,6 @@ export default function FoodChecker() {
             </div>
           )}
 
-          {!result && !loading && (
-            <div className="text-center py-6 text-text-secondary">
-              <FoodBowlIllustration size={90} className="mx-auto mb-3 animate-float" />
-              <p className="text-sm font-medium">Paste an ingredient list to get started</p>
-              <p className="text-xs mt-1 text-text-secondary/70">We&apos;ll check what&apos;s good (and not so good) for Tuna</p>
-            </div>
-          )}
         </div>
       )}
     </div>

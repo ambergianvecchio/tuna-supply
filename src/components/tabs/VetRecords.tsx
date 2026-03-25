@@ -44,7 +44,8 @@ const typeConfig: Record<RecordType, { bg: string; dot: string }> = {
 }
 
 const PIN_HASH = '3170'
-const STORAGE_KEY = 'tuna-records-unlocked'
+const STORAGE_KEY = 'tuna-records-unlocked-at'
+const PIN_TIMEOUT_MS = 15 * 60 * 1000
 
 export default function VetRecords() {
   const [unlocked, setUnlocked] = useState(false)
@@ -60,15 +61,20 @@ export default function VetRecords() {
   const docInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && localStorage.getItem(STORAGE_KEY) === 'true') {
-      setUnlocked(true)
+    if (typeof window !== 'undefined') {
+      const unlockedAt = localStorage.getItem(STORAGE_KEY)
+      if (unlockedAt && Date.now() - Number(unlockedAt) < PIN_TIMEOUT_MS) {
+        setUnlocked(true)
+      } else {
+        localStorage.removeItem(STORAGE_KEY)
+      }
     }
   }, [])
 
   function handlePinSubmit() {
     if (pinInput === PIN_HASH) {
       setUnlocked(true)
-      localStorage.setItem(STORAGE_KEY, 'true')
+      localStorage.setItem(STORAGE_KEY, String(Date.now()))
       setPinError(false)
     } else {
       setPinError(true)
