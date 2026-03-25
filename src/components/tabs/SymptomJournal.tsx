@@ -174,7 +174,7 @@ export default function SymptomJournal() {
       <div className="flex items-center justify-between">
         <div>
           <h2 className="font-display text-lg font-extrabold text-island-green">Symptom Journal</h2>
-          <p className="text-sm text-text-secondary mt-1">Track Tuna&apos;s symptoms over time</p>
+          <p className="text-sm text-text-secondary mt-1">Track Tuna&apos;s health</p>
         </div>
         <button
           onClick={() => { resetForm(); setShowModal(true) }}
