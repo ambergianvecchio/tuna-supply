@@ -14,7 +14,7 @@ const tabs = [
 
 export default function TabBar({ activeTab, onChange }: TabBarProps) {
   return (
-    <nav className="sticky bottom-0 w-full bg-white border-t border-warm-border/40 px-2 pb-2 z-50">
+    <nav className="sticky bottom-0 w-full bg-white border-t border-warm-border/40 px-2 pb-4 z-50">
       <div className="flex justify-around items-center h-16">
         {tabs.map((tab, i) => {
           const isActive = activeTab === i
