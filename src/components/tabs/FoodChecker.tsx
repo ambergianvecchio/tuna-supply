@@ -26,7 +26,7 @@ function ResultCard({ data, name }: { data: AnalysisResult; name?: string }) {
     <div className="card-warm space-y-4">
       <div className="flex items-center justify-between">
         {name && <p className="font-display font-bold text-sm">{name}</p>}
-        <span className={`badge badge-sticker ${config.badge}`}>{config.label}</span>
+        <span className={`badge ${config.badge}`}>{config.label}</span>
       </div>
 
       {data.protein_sources.length > 0 && (

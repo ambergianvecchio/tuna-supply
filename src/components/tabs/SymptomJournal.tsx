@@ -203,7 +203,7 @@ export default function SymptomJournal() {
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-semibold">{formatDate(log.date)}</span>
                   {log.triage_level && urgencyConfig[log.triage_level] && (
-                    <span className={`badge badge-sticker text-[10px] ${urgencyConfig[log.triage_level].badge}`}>
+                    <span className={`badge text-[10px] ${urgencyConfig[log.triage_level].badge}`}>
                       {urgencyConfig[log.triage_level].label}
                     </span>
                   )}
@@ -340,7 +340,7 @@ export default function SymptomJournal() {
           {triageResult && (
             <div className="card-warm space-y-3 !border-warm-border/50">
               <div className="text-center">
-                <span className={`badge badge-sticker ${urgencyConfig[triageResult.urgency]?.badge || 'badge-watch'} text-sm px-4 py-2`}>
+                <span className={`badge ${urgencyConfig[triageResult.urgency]?.badge || 'badge-watch'} text-sm px-4 py-2`}>
                   {urgencyConfig[triageResult.urgency]?.label || triageResult.urgency}
                 </span>
               </div>
