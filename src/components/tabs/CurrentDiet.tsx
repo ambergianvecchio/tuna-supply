@@ -226,11 +226,11 @@ export default function CurrentDiet() {
                         <span className="text-[10px] text-text-secondary font-medium">{item.amount}</span>
                       )}
                     </div>
-                    {item.ingredients && (
-                      <p className="font-semibold text-sm">{item.ingredients}</p>
-                    )}
                     {item.brand && (
-                      <p className="text-xs text-text-secondary mt-0.5">{item.brand}</p>
+                      <p className="font-semibold text-sm">{item.brand}</p>
+                    )}
+                    {item.ingredients && (
+                      <p className="text-xs text-text-secondary mt-0.5">{item.ingredients}</p>
                     )}
                     {/* Calorie info */}
                     {itemResearching ? (
