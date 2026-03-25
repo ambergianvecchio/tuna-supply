@@ -81,7 +81,7 @@ export default function Header() {
               </p>
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/tree.png" alt="" className="absolute -right-2 -bottom-3 w-[95px] h-[95px] object-contain" />
+            <img src="/tree.png" alt="" className="absolute right-0 -bottom-3 w-[95px] h-[95px] object-contain" />
           </div>
         </div>
       </div>
