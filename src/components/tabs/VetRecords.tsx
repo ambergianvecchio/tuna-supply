@@ -569,19 +569,19 @@ export default function VetRecords() {
           <div>
             <label className="text-xs font-bold uppercase tracking-wider text-text-secondary">Date</label>
             <input type="date" value={formDate} onChange={(e) => setFormDate(e.target.value)}
-              className="w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 mt-1 border border-warm-border/40" />
+              className="w-full max-w-full box-border bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 mt-1 border border-warm-border/40 appearance-none" />
           </div>
 
           <div>
             <label className="text-xs font-bold uppercase tracking-wider text-text-secondary">Vet / Clinic (optional)</label>
             <input type="text" placeholder="Vet clinic name" value={formVetName} onChange={(e) => setFormVetName(e.target.value)}
-              className="w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 mt-1 border border-warm-border/40" />
+              className="w-full max-w-full box-border bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 mt-1 border border-warm-border/40 appearance-none" />
           </div>
 
           {formType === 'medication' && (
             <div className="space-y-3 border-t border-warm-border/30 pt-3">
               <input type="text" placeholder="Medication name *" value={formMedName} onChange={(e) => setFormMedName(e.target.value)}
-                className="w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 border border-warm-border/40" />
+                className="w-full max-w-full box-border bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 border border-warm-border/40 appearance-none" />
               <div className="grid grid-cols-2 gap-2">
                 <input type="text" placeholder="Dosage" value={formMedDosage} onChange={(e) => setFormMedDosage(e.target.value)}
                   className="bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 border border-warm-border/40" />
@@ -592,12 +592,12 @@ export default function VetRecords() {
                 <div>
                   <label className="text-xs text-text-secondary">Start date</label>
                   <input type="date" value={formMedStartDate} onChange={(e) => setFormMedStartDate(e.target.value)}
-                    className="w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 border border-warm-border/40" />
+                    className="w-full max-w-full box-border bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 border border-warm-border/40 appearance-none" />
                 </div>
                 <div>
                   <label className="text-xs text-text-secondary">End date</label>
                   <input type="date" value={formMedEndDate} onChange={(e) => setFormMedEndDate(e.target.value)}
-                    className="w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 border border-warm-border/40" />
+                    className="w-full max-w-full box-border bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 border border-warm-border/40 appearance-none" />
                 </div>
               </div>
             </div>
@@ -606,11 +606,11 @@ export default function VetRecords() {
           {formType === 'vaccine' && (
             <div className="space-y-3 border-t border-warm-border/30 pt-3">
               <input type="text" placeholder="Vaccine name *" value={formVacName} onChange={(e) => setFormVacName(e.target.value)}
-                className="w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 border border-warm-border/40" />
+                className="w-full max-w-full box-border bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 border border-warm-border/40 appearance-none" />
               <div>
                 <label className="text-xs text-text-secondary">Next due date</label>
                 <input type="date" value={formVacNextDue} onChange={(e) => setFormVacNextDue(e.target.value)}
-                  className="w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 border border-warm-border/40" />
+                  className="w-full max-w-full box-border bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 border border-warm-border/40 appearance-none" />
               </div>
             </div>
           )}
