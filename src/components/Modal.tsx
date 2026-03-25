@@ -15,11 +15,14 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden'
+      document.documentElement.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
     }
     return () => {
       document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
     }
   }, [open])
 
@@ -28,7 +31,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
   return (
     <div
       ref={backdropRef}
-      className="fixed inset-0 bg-black/40 z-[60] flex items-end justify-center"
+      className="fixed inset-0 bg-black/40 z-[60] flex items-end justify-center overflow-hidden"
       onClick={(e) => e.target === backdropRef.current && onClose()}
     >
       <div className="w-full max-w-[430px] mx-2 bg-white rounded-t-[24px] max-h-[90dvh] flex flex-col animate-slide-up overflow-hidden">
@@ -44,7 +47,7 @@ export default function Modal({ open, onClose, title, children }: ModalProps) {
             </svg>
           </button>
         </div>
-        <div className="px-4 py-4 flex-1 min-h-0 overflow-y-auto">
+        <div className="px-4 py-4 flex-1 min-h-0 overflow-y-auto overflow-x-hidden">
           {children}
         </div>
       </div>
