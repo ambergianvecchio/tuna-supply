@@ -142,9 +142,6 @@ export function FoodBowlIllustration({ size = 80, className = '' }: { size?: num
         {/* Bowl */}
         <path d="M15 32 Q15 52 40 52 Q65 52 65 32 Z" fill="#6B7F5E" stroke={O} strokeWidth="2.5" />
         <ellipse cx="40" cy="32" rx="25" ry="7" fill="#E8EDE4" stroke={O} strokeWidth="2.5" />
-        {/* Steam */}
-        <path d="M32 18 Q34 12 32 6" stroke={O} strokeWidth="1.2" opacity="0.2" fill="none" />
-        <path d="M42 16 Q44 10 42 4" stroke={O} strokeWidth="1.2" opacity="0.2" fill="none" />
       </svg>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src="/shrimp.png" alt="shrimp" width={size * 0.4} height={size * 0.4} style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', zIndex: 1, mixBlendMode: 'multiply' }} />
