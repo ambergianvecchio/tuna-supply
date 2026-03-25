@@ -147,7 +147,7 @@ export function FoodBowlIllustration({ size = 80, className = '' }: { size?: num
         <path d="M42 16 Q44 10 42 4" stroke={O} strokeWidth="1.2" opacity="0.2" fill="none" />
       </svg>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/shrimp.png" alt="shrimp" width={size * 0.4} height={size * 0.4} style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', zIndex: 1 }} />
+      <img src="/shrimp.png" alt="shrimp" width={size * 0.4} height={size * 0.4} style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', zIndex: 1, mixBlendMode: 'multiply' }} />
     </div>
   )
 }
