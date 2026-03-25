@@ -35,7 +35,7 @@ export default function SafetyChecker() {
   }, [])
 
   function addToHistory(item: string) {
-    const updated = [item, ...history.filter((h) => h !== item)].slice(0, 8)
+    const updated = [item, ...history.filter((h) => h !== item)].slice(0, 6)
     setHistory(updated)
     localStorage.setItem(HISTORY_KEY, JSON.stringify(updated))
   }
@@ -138,7 +138,7 @@ export default function SafetyChecker() {
           <h4 className="text-xs font-bold uppercase tracking-wider text-text-secondary mb-2">
             Recent Checks
           </h4>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 max-h-[5.5rem] overflow-hidden">
             {history.map((item, i) => (
               <button
                 key={i}
@@ -164,6 +164,8 @@ export default function SafetyChecker() {
           </p>
         </div>
       )}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/cat-sitting.svg" alt="" className="w-[280px] mx-auto !mt-2" style={{ transform: 'scaleX(-1)' }} />
     </div>
   )
 }
