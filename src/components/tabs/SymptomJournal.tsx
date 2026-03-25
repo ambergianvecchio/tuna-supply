@@ -210,7 +210,7 @@ export default function SymptomJournal() {
           <div>
             <label className="text-xs font-bold uppercase tracking-wider text-text-secondary">Date</label>
             <input type="date" value={formDate} onChange={(e) => setFormDate(e.target.value)}
-              className="w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 mt-1 border border-warm-border/40" />
+              className="w-full max-w-full box-border bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 mt-1 border border-warm-border/40 appearance-none" />
           </div>
 
           <div>
