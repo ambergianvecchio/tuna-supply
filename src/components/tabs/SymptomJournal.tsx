@@ -267,7 +267,7 @@ export default function SymptomJournal() {
             </div>
           ))}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/cat-silhouette.svg" alt="" className="mx-auto w-[200px] !mt-4" />
+          <img src="/cat-silhouette.svg" alt="" className="mx-auto w-[200px] !mt-8" />
         </div>
       )}
 
