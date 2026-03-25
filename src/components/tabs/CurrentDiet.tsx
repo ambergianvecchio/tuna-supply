@@ -31,7 +31,7 @@ const typeConfig: Record<string, { bg: string; icon: string }> = {
   dry: { bg: 'bg-warm-yellow/10 text-yellow-700 border-warm-yellow/30', icon: '/tempura.png' },
   raw: { bg: 'bg-island-green/10 text-island-green border-island-green/20', icon: '/skewer.png' },
   'freeze-dried': { bg: 'bg-coral-red/10 text-coral-red border-coral-red/20', icon: '/tempura.png' },
-  topper: { bg: 'bg-purple-100 text-purple-700 border-purple-200', icon: '/skewer.png' },
+  topper: { bg: 'bg-purple-100 text-purple-700 border-purple-200', icon: '/garnish.png' },
 }
 
 function parseAnalysis(analysis: string | null): CalorieData | null {
@@ -53,10 +53,11 @@ export default function CurrentDiet() {
   // Form state
   const [formBrand, setFormBrand] = useState('')
   const [formIngredients, setFormIngredients] = useState('')
-  const [formType, setFormType] = useState<string>('wet')
+  const [formTypes, setFormTypes] = useState<string[]>(['wet'])
   const [formAmount, setFormAmount] = useState('')
   const [saving, setSaving] = useState(false)
   const [formError, setFormError] = useState('')
+  const [formErrorField, setFormErrorField] = useState<string | null>(null)
 
   async function researchCalories(item: DietItem) {
     setResearchingIds((prev) => new Set(prev).add(item.id))
@@ -105,21 +106,29 @@ export default function CurrentDiet() {
   function resetForm() {
     setFormBrand('')
     setFormIngredients('')
-    setFormType('wet')
+    setFormTypes(['wet'])
     setFormAmount('')
     setFormError('')
+    setFormErrorField(null)
   }
 
   async function handleSave() {
+    setFormErrorField(null)
     if (!formBrand.trim() && !formIngredients.trim()) {
       setFormError('Please enter a brand or product name')
+      setFormErrorField('brand')
+      return
+    }
+    if (!formAmount.trim()) {
+      setFormError('Please enter the amount or serving size')
+      setFormErrorField('amount')
       return
     }
     setSaving(true)
     setFormError('')
     try {
       const { data: newItem, error } = await supabase.from('current_diet').insert({
-        type: formType,
+        type: formTypes.join('+'),
         brand: formBrand || null,
         amount: formAmount || null,
         ingredients: formIngredients || null,
@@ -132,7 +141,8 @@ export default function CurrentDiet() {
 
       // Research calories in background
       researchCalories(newItem as DietItem)
-    } catch {
+    } catch (err) {
+      console.error('Save error:', err)
       setFormError('Failed to save. Please try again.')
     } finally {
       setSaving(false)
@@ -210,7 +220,8 @@ export default function CurrentDiet() {
       ) : (
         <div className="space-y-2">
           {items.map((item) => {
-            const config = typeConfig[item.type] || typeConfig.wet
+            const itemTypes = item.type.split('+')
+            const config = typeConfig[itemTypes[0]] || typeConfig.wet
             const cal = parseAnalysis(item.analysis)
             const itemResearching = researchingIds.has(item.id)
             return (
@@ -219,9 +230,11 @@ export default function CurrentDiet() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <img src={config.icon} alt="" className="w-4 h-4" />
-                      <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase border ${config.bg}`}>
-                        {item.type}
-                      </span>
+                      {itemTypes.map((t) => (
+                        <span key={t} className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase border ${(typeConfig[t] || typeConfig.wet).bg}`}>
+                          {t}
+                        </span>
+                      ))}
                       {item.amount && (
                         <span className="text-[10px] text-text-secondary font-medium">{item.amount}</span>
                       )}
@@ -270,8 +283,8 @@ export default function CurrentDiet() {
         <div className="space-y-4">
           <div>
             <label className="text-xs font-bold uppercase tracking-wider text-text-secondary">Brand</label>
-            <input type="text" placeholder="e.g. Fancy Feast" value={formBrand} onChange={(e) => setFormBrand(e.target.value)}
-              className="w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 mt-1 border border-warm-border/40" />
+            <input type="text" placeholder="e.g. Fancy Feast" value={formBrand} onChange={(e) => { setFormBrand(e.target.value); setFormErrorField(null) }}
+              className={`w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 mt-1 border ${formErrorField === 'brand' ? 'border-coral-red' : 'border-warm-border/40'}`} />
           </div>
 
           <div>
@@ -284,9 +297,9 @@ export default function CurrentDiet() {
             <label className="text-xs font-bold uppercase tracking-wider text-text-secondary">Type</label>
             <div className="flex flex-wrap gap-2 mt-2">
               {FOOD_TYPES.map((type) => (
-                <button key={type} onClick={() => setFormType(type)}
+                <button key={type} onClick={() => setFormTypes((prev) => prev.includes(type) ? (prev.length > 1 ? prev.filter((t) => t !== type) : prev) : [...prev, type])}
                   className={`text-xs px-3 py-2 rounded-full font-semibold transition-colors border capitalize ${
-                    formType === type
+                    formTypes.includes(type)
                       ? 'bg-teal text-white border-teal shadow-warm'
                       : 'bg-white text-text-secondary border-warm-border/40 hover:bg-teal-light hover:border-teal/30'
                   }`}
@@ -297,8 +310,8 @@ export default function CurrentDiet() {
 
           <div>
             <label className="text-xs font-bold uppercase tracking-wider text-text-secondary">Amount / Serving</label>
-            <input type="text" placeholder="e.g. 1/3 cup daily" value={formAmount} onChange={(e) => setFormAmount(e.target.value)}
-              className="w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 mt-1 border border-warm-border/40" />
+            <input type="text" placeholder="e.g. 1/3 cup daily, 3 pieces/day" value={formAmount} onChange={(e) => { setFormAmount(e.target.value); setFormErrorField(null) }}
+              className={`w-full bg-white rounded-card px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-teal/30 mt-1 border ${formErrorField === 'amount' ? 'border-coral-red' : 'border-warm-border/40'}`} />
           </div>
 
           {formError && <p className="text-sm text-coral-red text-center">{formError}</p>}
