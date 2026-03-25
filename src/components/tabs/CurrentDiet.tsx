@@ -250,7 +250,7 @@ export default function CurrentDiet() {
                   <button
                     onClick={() => handleDelete(item.id)}
                     disabled={deleting === item.id}
-                    className="shrink-0 w-7 h-7 flex items-center justify-center rounded-full text-text-secondary/50 hover:bg-coral-red/10 hover:text-coral-red transition-colors disabled:opacity-50"
+                    className="shrink-0 w-8 h-8 flex items-center justify-center text-text-secondary hover:text-coral-red transition-colors disabled:opacity-50"
                     title="Remove from diet"
                   >
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
