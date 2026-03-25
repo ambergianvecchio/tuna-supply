@@ -138,7 +138,7 @@ export default function SafetyChecker() {
           <h4 className="text-xs font-bold uppercase tracking-wider text-text-secondary mb-2">
             Recent Checks
           </h4>
-          <div className="flex flex-wrap gap-2 max-h-[5.5rem] overflow-hidden">
+          <div className="flex flex-wrap gap-2">
             {history.map((item, i) => (
               <button
                 key={i}
