@@ -71,11 +71,11 @@ export default function Header() {
               <h1 className="font-display text-2xl font-extrabold text-island-green">Tuna</h1>
               <Sparkle size={14} />
             </div>
-            <p className="text-xs text-text-secondary mt-0.5 flex items-center gap-1">
+            <p className="text-sm text-text-secondary mt-1.5 flex items-center gap-1">
               <LeafSprig size={14} />
               {calculateAge(TUNA_BIRTHDAY)}
             </p>
-            <p className="text-xs text-text-secondary mt-0.5 flex items-center gap-1">
+            <p className="text-sm text-text-secondary mt-1 flex items-center gap-1">
               <IconCake size={14} /> Jan 17, 2023
             </p>
           </div>
