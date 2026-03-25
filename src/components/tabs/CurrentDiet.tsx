@@ -29,7 +29,7 @@ const FOOD_TYPES = ['wet', 'dry', 'raw', 'freeze-dried', 'topper'] as const
 const typeConfig: Record<string, { bg: string; icon: string }> = {
   wet: { bg: 'bg-teal/10 text-teal border-teal/20', icon: '/skewer.png' },
   dry: { bg: 'bg-warm-yellow/10 text-yellow-700 border-warm-yellow/30', icon: '/tempura.png' },
-  raw: { bg: 'bg-island-green/10 text-island-green border-island-green/20', icon: '/skewer.png' },
+  raw: { bg: 'bg-island-green/10 text-island-green border-island-green/20', icon: '/raw.png' },
   'freeze-dried': { bg: 'bg-coral-red/10 text-coral-red border-coral-red/20', icon: '/tempura.png' },
   topper: { bg: 'bg-purple-100 text-purple-700 border-purple-200', icon: '/garnish.png' },
 }
@@ -221,7 +221,8 @@ export default function CurrentDiet() {
         <div className="space-y-2">
           {items.map((item) => {
             const itemTypes = item.type.split('+')
-            const config = typeConfig[itemTypes[0]] || typeConfig.wet
+            const iconType = itemTypes.includes('topper') ? 'topper' : itemTypes[0]
+            const config = typeConfig[iconType] || typeConfig.wet
             const cal = parseAnalysis(item.analysis)
             const itemResearching = researchingIds.has(item.id)
             return (
